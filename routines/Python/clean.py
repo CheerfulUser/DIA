@@ -35,7 +35,7 @@ flatdiv = 0 # yes = 1 no = 0 to flat field
 align = 1# yes = 1 no = 0 to align based on coordinates
 
 #useful directories
-rawdir = '.../cal/' #directory with the raw images
+rawdir = '/home/rridden/data/tess/ffi/s01/' #directory with the raw images
 cdedir = '.../code/clean/' #directory where the code 'lives'
 caldir = 'N/A' #directory with the calibration images such as bias & flat
 clndir = '../clean/'#directory for the cleaned images to be output
@@ -92,8 +92,8 @@ for ii in range(0, nfiles):
 
 	#only create the files that don't exist
 	if (os.path.isfile(clndir+finnme) == 0):
-    		#start the watch
-    		st = time.time()
+			#start the watch
+			st = time.time()
 		sts = time.strftime("%c")
 		print 'Now cleaning '+files[ii]+' at '+sts+'.'
 
@@ -256,9 +256,9 @@ for ii in range(0, nfiles):
 		#write out the subtraction
 		shd = fits.PrimaryHDU(algn, header=header)
 		shd.writeto(clndir+finnme, overwrite = True)
-    	
+		
 		#stop the watch
-    		fn = time.time()
-    		print 'Background subtraction for '+files[ii]+' finished in '+str(fn-st)+'s.'
+			fn = time.time()
+			print 'Background subtraction for '+files[ii]+' finished in '+str(fn-st)+'s.'
 
 print 'All done! See ya later alliagtor.'
