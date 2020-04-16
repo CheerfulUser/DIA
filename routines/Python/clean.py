@@ -135,7 +135,7 @@ for ii in range(0, nfiles):
 				y = numpy.zeros(shape=(sze))
 				v = numpy.zeros(shape=(sze))
 				s = numpy.zeros(shape=(sze))
-				nd = long(0)
+				nd = 0
 	
 				#begin the sampling of the "local" sky value
 				for jj in range(0, bxs+pix, pix):
@@ -153,7 +153,7 @@ for ii in range(0, nfiles):
 						y[nd] = numpy.amin([kk, bxs-1]) #determine the pixel to input
 						v[nd] = lsky #median sky
 						s[nd] = ssky #sigma sky
-						nd = nd + 1
+						nd += 1
 
 				#now we want to remove any possible values which have bad sky values
 				rj = numpy.where(v <= 0) #stuff to remove
