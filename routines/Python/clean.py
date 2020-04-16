@@ -35,10 +35,10 @@ flatdiv = 0 # yes = 1 no = 0 to flat field
 align = 1# yes = 1 no = 0 to align based on coordinates
 
 #useful directories
-rawdir = '/home/rridden/data/tess/ffi/s01/' #directory with the raw images
+rawdir = '/home/rridden/data/tess/ffi/s01/raw/' #directory with the raw images
 cdedir = '.../code/clean/' #directory where the code 'lives'
 caldir = 'N/A' #directory with the calibration images such as bias & flat
-clndir = '../clean/'#directory for the cleaned images to be output
+clndir = '/home/rridden/data/tess/ffi/s01/clean/'#directory for the cleaned images to be output
 
 #sample every how many pixels? usually 32x32 is OK but it can be larger or smaller
 pix = 32 # UPDATE HERE FOR BACKGROUND SPACING
@@ -46,11 +46,11 @@ axs = 2048 # UPDATE HERE FOR IMAGE AXIS SIZE
 ###END UPDATE INFORMATION###
 
 #get the image list and the number of files which need reduction
-os.chdir(rawdir) #changes to the raw image direcotory
-files = [f for f in glob.glob("*.fits") if isfile(join(rawdir, f))] #gets the relevant files with the proper extension
+#os.chdir(rawdir) #changes to the raw image direcotory
+files = glob.glob(rawdir+"*.fits") #gets the relevant files with the proper extension
 files.sort()
 nfiles = len(files)
-os.chdir(cdedir) #changes back to the code directory
+#os.chdir(cdedir) #changes back to the code directory
 
 #get the zeroth image for registration
 #read in the image
