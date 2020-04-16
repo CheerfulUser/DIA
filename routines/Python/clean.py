@@ -95,7 +95,7 @@ for ii in range(0, nfiles):
 			#start the watch
 		st = time.time()
 		sts = time.strftime("%c")
-		print 'Now cleaning '+files[ii]+' at '+sts+'.'
+		print('Now cleaning '+files[ii]+' at '+sts+'.')
 
 		#read in the image
 		orgimg, header = fits.getdata(rawdir+files[ii], header = True)
@@ -259,6 +259,6 @@ for ii in range(0, nfiles):
 		
 		#stop the watch
 		fn = time.time()
-		print 'Background subtraction for '+files[ii]+' finished in '+str(fn-st)+'s.'
+		print('Background subtraction for '+files[ii]+' finished in '+str(fn-st)+'s.')
 
-print 'All done! See ya later alliagtor.'
+print('All done! See ya later alliagtor.')
