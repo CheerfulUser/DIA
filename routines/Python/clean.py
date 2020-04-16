@@ -93,7 +93,7 @@ for ii in range(0, nfiles):
 	#only create the files that don't exist
 	if (os.path.isfile(clndir+finnme) == 0):
 			#start the watch
-			st = time.time()
+		st = time.time()
 		sts = time.strftime("%c")
 		print 'Now cleaning '+files[ii]+' at '+sts+'.'
 
@@ -258,7 +258,7 @@ for ii in range(0, nfiles):
 		shd.writeto(clndir+finnme, overwrite = True)
 		
 		#stop the watch
-			fn = time.time()
-			print 'Background subtraction for '+files[ii]+' finished in '+str(fn-st)+'s.'
+		fn = time.time()
+		print 'Background subtraction for '+files[ii]+' finished in '+str(fn-st)+'s.'
 
 print 'All done! See ya later alliagtor.'
