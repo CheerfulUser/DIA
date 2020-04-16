@@ -54,7 +54,7 @@ nfiles = len(files)
 
 #get the zeroth image for registration
 #read in the image
-ref, rhead = fits.getdata(rawdir+files[0], header = True)
+ref, rhead = fits.getdata(files[0], header = True)
 rhead['CRPIX1'] = 1001.
 rhead['NAXIS1'] = 2048
 rhead['NAXIS2'] = 2048
@@ -78,27 +78,27 @@ if (biassub == 1):
 
 #begin cleaning
 for ii in range(0, nfiles):
-	hld = files[ii].split('.')
+	hld = files[ii].split('/')[-1].split('.')[0]
 
 	#update the name to be appropriate for what was done to the file
 	if (biassub == 0) and (flatdiv == 0) and (align == 0): 
-		finnme = hld[0]+'_s.fits'
+		finnme = hld +'_s.fits'
 	if (biassub == 1) and (flatdiv == 1) and (align == 0):
-		finnme = hld[0]+'_sfb.fits'
+		finnme = hld +'_sfb.fits'
 	if (biassub == 0) and (flatdiv == 0) and (align == 1):
-		finnme = hld[0]+'_sa.fits'
+		finnme = hld +'_sa.fits'
 	if (biassub == 1) and (flatdiv == 1) and (align == 1):
-		finnme = hld[0]+'_sfba.fits'
+		finnme = hld +'_sfba.fits'
 
 	#only create the files that don't exist
 	if (os.path.isfile(clndir+finnme) == 0):
-			#start the watch
+		#start the watch
 		st = time.time()
 		sts = time.strftime("%c")
-		print('Now cleaning '+files[ii]+' at '+sts+'.')
+		print('Now cleaning '+files[ii].split('/')[-1]+' at '+sts+'.')
 
 		#read in the image
-		orgimg, header = fits.getdata(rawdir+files[ii], header = True)
+		orgimg, header = fits.getdata(files[ii], header = True)
 		w = WCS(header)
 		cut = Cutout2D(orgimg, (1068,1024), (axs, axs), wcs = w)
 		bigimg = cut.data
@@ -259,6 +259,6 @@ for ii in range(0, nfiles):
 		
 		#stop the watch
 		fn = time.time()
-		print('Background subtraction for '+files[ii]+' finished in '+str(fn-st)+'s.')
+		print('Background subtraction for '+files[ii].split('/')[-1]+' finished in '+str(fn-st)+'s.')
 
 print('All done! See ya later alliagtor.')
