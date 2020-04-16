@@ -62,7 +62,7 @@ rhead['NAXIS2'] = 2048
 #sample every how many pixels?
 bxs = 512 #how big do you want to make the boxes for each image?
 lop = 2*pix
-sze = (bxs/pix)*(bxs/pix)+2*(bxs/pix)+1 #size holder for later
+sze = int((bxs/pix)*(bxs/pix)+2*(bxs/pix)+1) #size holder for later
 
 #read in the flat
 if (flatdiv == 1):
@@ -110,8 +110,8 @@ for ii in range(0, nfiles):
 
 		#get the holders ready
 		res = numpy.zeros(shape=(axs, axs)) #holder for the background 'image'
-		bck = numpy.zeros(shape=((axs/bxs)**2)) #get the holder for the image backgroudn
-		sbk = numpy.zeros(shape=((axs/bxs)**2)) #get the holder for the sigma of the image background
+		bck = numpy.zeros(shape=(int((axs/bxs)**2))) #get the holder for the image backgroudn
+		sbk = numpy.zeros(shape=(int((axs/bxs)**2))) #get the holder for the sigma of the image background
 
 		#remove the flat and the bias
 		if (biassub == 1) and (flatdiv == 1):
