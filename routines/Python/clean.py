@@ -156,10 +156,10 @@ for ii in range(0, nfiles):
 						nd += 1
 
 				#now we want to remove any possible values which have bad sky values
-				rj = np.where(v <= 0) #stuff to remove
-				kp = np.where(v > 0) #stuff to keep
+				rj = np.where(v <= 0)[0] #stuff to remove
+				kp = np.where(v > 0)[0] #stuff to keep
 
-				if (len(rj[0]) > 0):
+				if (len(rj) > 0):
 					print(rj.shape,rj)
 					#keep only the good points
 					xgood = x[kp]
@@ -167,7 +167,7 @@ for ii in range(0, nfiles):
 					vgood = v[kp]
 					sgood = s[kp]
 
-					for jj in range(0, len(rj[0])):
+					for jj in range(len(rj)):
 						#select the bad point
 						xbad = x[rj[jj]]
 						ybad = y[rj[jj]]
