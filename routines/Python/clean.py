@@ -28,6 +28,13 @@ from os.path import isfile, join
 #import relevant spline libraries
 from scipy.interpolate import Rbf
 
+
+
+Sector = 1 
+Camera = 4
+CCD = 1
+
+
 #####UPDATE INFORMATION HERE####
 #DO YOU WANT TO FLAT FIELD AND BIAS SUBTRACT?
 biassub = 0 # yes = 1 no = 0 to bias subtract
@@ -47,6 +54,7 @@ axs = 2048 # UPDATE HERE FOR IMAGE AXIS SIZE
 
 #get the image list and the number of files which need reduction
 #os.chdir(rawdir) #changes to the raw image direcotory
+filestyle = '*{Sector:04}-{Camera}-{CCD}*.fits'.format(Sector = Sector, Camera = Camera, CCD = CCD)
 files = glob.glob(rawdir+"*.fits") #gets the relevant files with the proper extension
 files.sort()
 nfiles = len(files)
