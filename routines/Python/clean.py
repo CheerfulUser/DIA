@@ -160,7 +160,7 @@ for ii in range(0, nfiles):
 				kp = np.where(v > 0)[0] #stuff to keep
 
 				if (len(rj) > 0):
-					print(rj.shape,rj)
+					#print(rj.shape,rj)
 					#keep only the good points
 					xgood = x[kp]
 					ygood = y[kp]
@@ -171,8 +171,8 @@ for ii in range(0, nfiles):
 						#select the bad point
 						xbad = x[rj[jj]]
 						ybad = y[rj[jj]]
-						print('x',xgood.shape,xbad.shape)
-						print('y',ygood.shape,ybad.shape)
+						#print('x',xgood.shape,xbad.shape)
+						#print('y',ygood.shape,ybad.shape)
 						#use the distance formula to get the closest points
 						rd = np.sqrt((xgood-xbad)**2.+(ygood-ybad)**2.)
 						#sort the radii
