@@ -5,7 +5,7 @@
 #if you use this code, please cite Oelkers et al. 2015, AJ, 149, 50
 
 #import the relevant libraries for basic tools
-import numpy
+import numpy as np 
 import scipy
 from scipy import stats
 import scipy.ndimage as ndimage
@@ -109,9 +109,9 @@ for ii in range(0, nfiles):
 		header['NAXIS2'] = 2048
 
 		#get the holders ready
-		res = numpy.zeros(shape=(axs, axs)) #holder for the background 'image'
-		bck = numpy.zeros(shape=(int((axs/bxs)**2))) #get the holder for the image backgroudn
-		sbk = numpy.zeros(shape=(int((axs/bxs)**2))) #get the holder for the sigma of the image background
+		res = np.zeros(shape=(axs, axs)) #holder for the background 'image'
+		bck = np.zeros(shape=(int((axs/bxs)**2))) #get the holder for the image backgroudn
+		sbk = np.zeros(shape=(int((axs/bxs)**2))) #get the holder for the sigma of the image background
 
 		#remove the flat and the bias
 		if (biassub == 1) and (flatdiv == 1):
@@ -124,40 +124,40 @@ for ii in range(0, nfiles):
 				
 				#calculate the sky statistics
 				cimg, clow, chigh = scipy.stats.sigmaclip(img, low=2.5, high = 2.5) #do a 2.5 sigma clipping
-				sky = numpy.median(cimg) #determine the sky value
-				sig = numpy.std(cimg) #determine the sigma(sky)
+				sky = np.median(cimg) #determine the sky value
+				sig = np.std(cimg) #determine the sigma(sky)
 
 				bck[tts] = sky #insert the image median background
 				sbk[tts] = sig #insert the image sigma background
 
 				#create holder arrays for good and bad pixels
-				x = numpy.zeros(shape=(sze))
-				y = numpy.zeros(shape=(sze))
-				v = numpy.zeros(shape=(sze))
-				s = numpy.zeros(shape=(sze))
+				x = np.zeros(shape=(sze))
+				y = np.zeros(shape=(sze))
+				v = np.zeros(shape=(sze))
+				s = np.zeros(shape=(sze))
 				nd = 0
 	
 				#begin the sampling of the "local" sky value
 				for jj in range(0, bxs+pix, pix):
 					for kk in range(0,bxs+pix, pix):
-						il = numpy.amax([jj-lop,0])
-						ih = numpy.amin([jj+lop, bxs-1])
-						jl = numpy.amax([kk-lop, 0])
-						jh = numpy.amin([kk+lop, bxs-1])
+						il = np.amax([jj-lop,0])
+						ih = np.amin([jj+lop, bxs-1])
+						jl = np.amax([kk-lop, 0])
+						jh = np.amin([kk+lop, bxs-1])
 						c = img[jl:jh, il:ih]
 						#select the median value with clipping
 						cc, cclow, cchigh = scipy.stats.sigmaclip(c, low=2.5, high = 2.5) #sigma clip the background
-						lsky = numpy.median(cc) #the sky background
-						ssky = numpy.std(cc) #sigma of the sky background
-						x[nd] = numpy.amin([jj, bxs-1]) #determine the pixel to input
-						y[nd] = numpy.amin([kk, bxs-1]) #determine the pixel to input
+						lsky = np.median(cc) #the sky background
+						ssky = np.std(cc) #sigma of the sky background
+						x[nd] = np.amin([jj, bxs-1]) #determine the pixel to input
+						y[nd] = np.amin([kk, bxs-1]) #determine the pixel to input
 						v[nd] = lsky #median sky
 						s[nd] = ssky #sigma sky
 						nd += 1
 
 				#now we want to remove any possible values which have bad sky values
-				rj = numpy.where(v <= 0) #stuff to remove
-				kp = numpy.where(v > 0) #stuff to keep
+				rj = np.where(v <= 0) #stuff to remove
+				kp = np.where(v > 0) #stuff to keep
 
 				if (len(rj[0]) > 0):
 					#keep only the good points
@@ -171,27 +171,27 @@ for ii in range(0, nfiles):
 						xbad = x[rj[jj]]
 						ybad = y[rj[jj]]
 						#use the distance formula to get the closest points
-						rd = math.sqrt((xgood-ygood)**2.+(ygood-ybad)**2.)
+						rd = np.sqrt((xgood-xbad)**2.+(ygood-ybad)**2.)
 						#sort the radii
 						pp = sorted(range(len(rd)), key = lambda k:rd[k])
 						#use the closest 10 points to get a median
 						vnear = vgood[pp[0:9]]
-						ave = numpy.median(vnear)
+						ave = np.median(vnear)
 						#insert the good value into the array
 						v[rj[jj]] = ave
 
 				#now we want to remove any possible values which have bad sigmas
-				rjs = numpy.where(s >= 2*sig)
+				rjs = np.where(s >= 2*sig)
 				rj  = rjs[0]
-				kps = numpy.where(s < 2*sig)
+				kps = np.where(s < 2*sig)
 				kp  = kps[0]
 
 				if (len(rj) > 0):
 					#keep only the good points
-					xgood = numpy.array(x[kp])
-					ygood = numpy.array(y[kp])
-					vgood = numpy.array(v[kp])
-					sgood = numpy.array(s[kp])
+					xgood = np.array(x[kp])
+					ygood = np.array(y[kp])
+					vgood = np.array(v[kp])
+					sgood = np.array(s[kp])
 
 					for jj in range(0, len(rj)):
 						#select the bad point
@@ -199,19 +199,19 @@ for ii in range(0, nfiles):
 						ybad = y[rj[jj]]
 						#print xbad, ybad
 						#use the distance formula to get the closest points
-						rd = numpy.sqrt((xgood-xbad)**2.+(ygood-ybad)**2.)
+						rd = np.sqrt((xgood-xbad)**2.+(ygood-ybad)**2.)
 						#sort the radii
 						pp = sorted(range(len(rd)), key = lambda k:rd[k])
 						#use the closest 10 points to get a median
 						vnear = vgood[pp[0:9]]
-						ave = numpy.median(vnear)
+						ave = np.median(vnear)
 						#insert the good value into the array
 						v[rj[jj]] = ave
 
 				#now we interpolate to the rest of the image with a thin-plate spline	
-				xi = numpy.linspace(0, bxs-1, bxs)
-				yi = numpy.linspace(0, bxs-1, bxs)
-				XI, YI = numpy.meshgrid(xi, yi)
+				xi = np.linspace(0, bxs-1, bxs)
+				yi = np.linspace(0, bxs-1, bxs)
+				XI, YI = np.meshgrid(xi, yi)
 				rbf = Rbf(x, y, v, function = 'thin-plate', smooth = 0.0)
 				reshld = rbf(XI, YI)
 			
@@ -220,8 +220,8 @@ for ii in range(0, nfiles):
 				tts = tts+1
 
 		#get the median background
-		mbck = numpy.median(bck)
-		sbck = numpy.median(sbk)
+		mbck = np.median(bck)
+		sbck = np.median(sbk)
 	
 		#subtract the sky gradient and add back the median background
 		sub = bigimg-res
