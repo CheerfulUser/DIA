@@ -170,6 +170,8 @@ for ii in range(0, nfiles):
 						#select the bad point
 						xbad = x[rj[jj]]
 						ybad = y[rj[jj]]
+						print('x',xgood,xbad)
+						print('y',ygood,ybad)
 						#use the distance formula to get the closest points
 						rd = np.sqrt((xgood-xbad)**2.+(ygood-ybad)**2.)
 						#sort the radii
