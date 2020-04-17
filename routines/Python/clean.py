@@ -184,7 +184,7 @@ for ii in range(0, nfiles):
 						v[rj[jj]] = ave
 
 				#now we want to remove any possible values which have bad sigmas
-				rjs = np.where(s >= 2*sig)[0]
+				rjs = np.where(s >= 2*sig)
 				rj  = rjs[0]
 				kps = np.where(s < 2*sig)
 				kp  = kps[0]
