@@ -55,7 +55,7 @@ axs = 2048 # UPDATE HERE FOR IMAGE AXIS SIZE
 #get the image list and the number of files which need reduction
 #os.chdir(rawdir) #changes to the raw image direcotory
 filestyle = '*{Sector:04}-{Camera}-{CCD}*.fits'.format(Sector = Sector, Camera = Camera, CCD = CCD)
-files = glob.glob(rawdir+"*.fits") #gets the relevant files with the proper extension
+files = glob.glob(rawdir+filestyle) #gets the relevant files with the proper extension
 files.sort()
 nfiles = len(files)
 #os.chdir(cdedir) #changes back to the code directory
