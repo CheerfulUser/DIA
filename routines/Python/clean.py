@@ -156,8 +156,8 @@ for ii in range(0, nfiles):
 						nd += 1
 
 				#now we want to remove any possible values which have bad sky values
-				rj = np.where(v <= 0) #stuff to remove
-				kp = np.where(v > 0) #stuff to keep
+				rj = np.where(v <= 0)[0] #stuff to remove
+				kp = np.where(v > 0)[0] #stuff to keep
 
 				if (len(rj[0]) > 0):
 					#keep only the good points
@@ -166,12 +166,12 @@ for ii in range(0, nfiles):
 					vgood = v[kp]
 					sgood = s[kp]
 
-					for jj in range(0, len(rj[0])):
+					for jj in range(0, len(rj)):
 						#select the bad point
 						xbad = x[rj[jj]]
 						ybad = y[rj[jj]]
-						print('x',xgood.shape,xbad.shape)
-						print('y',ygood.shape,ybad.shape)
+						#print('x',xgood.shape,xbad.shape)
+						#print('y',ygood.shape,ybad.shape)
 						#use the distance formula to get the closest points
 						rd = np.sqrt((xgood-xbad)**2.+(ygood-ybad)**2.)
 						#sort the radii
@@ -183,7 +183,7 @@ for ii in range(0, nfiles):
 						v[rj[jj]] = ave
 
 				#now we want to remove any possible values which have bad sigmas
-				rjs = np.where(s >= 2*sig)
+				rjs = np.where(s >= 2*sig)[0]
 				rj  = rjs[0]
 				kps = np.where(s < 2*sig)
 				kp  = kps[0]
