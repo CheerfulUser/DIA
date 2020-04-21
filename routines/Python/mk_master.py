@@ -53,7 +53,7 @@ for ii in range(0,len(files)):
 	cnt = cnt+1
 
 	if (ii % 10 == 0) and (ii > 0):
-		print 'Finished with 10 images at '+str(time.strftime("%a %d %b %Y %H:%M:%S"))+'.'
+		print('Finished with 10 images at '+str(time.strftime("%a %d %b %Y %H:%M:%S"))+'.')
 
 	if (ii == len(files)-1) or ((ii+1) % blknum == 0):
 		
@@ -72,7 +72,7 @@ for ii in range(0,len(files)):
 			if (kk >= 10) and (kk < 100):
 				new_image.writeto(cdedir+'frames/'+camera+'_'+ccd+'_master_'+str(kk)+'.fits',clobber=True)
 
-		print "The master frame hold was created using a median of "+str(cnt)+" images."
+		print("The master frame hold was created using a median of "+str(cnt)+" images.")
 		kk = kk+1
 		cnt = 0
 
