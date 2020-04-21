@@ -40,8 +40,8 @@ for ii in range(0,len(files)):
 
 	if (ii == 0):  # get size on first iteration only
 		nx = pyfits.getval(clndir+files[0], 'NAXIS2')
-			ny = pyfits.getval(clndir+files[0], 'NAXIS1')
-			all_data = np.ndarray(shape=(blknum,nx,ny))
+		ny = pyfits.getval(clndir+files[0], 'NAXIS1')
+		all_data = np.ndarray(shape=(blknum,nx,ny))
 		expt = np.zeros(blknum)
 
 	#read in the image
