@@ -77,7 +77,7 @@ for ii in range(0,len(files)):
 		cnt = 0
 
 		#clear the data file
-			all_data = np.ndarray(shape=(blknum,nx,ny))
+		all_data = np.ndarray(shape=(blknum,nx,ny))
 		expt = np.zeros(blknum)
 
 del all_data, img_data # clear up some memory
