@@ -18,13 +18,13 @@ from os.path import isfile, join, exists
 
 ###UPDATE HERE#####
 #what field are you looking at?
-camera = '2'
-ccd = '2'
+camera = '4'
+ccd = '1'
 blknum = 50 #how many images go into each holder?
 
 #useful directories
 cdedir = '../code/master/' #code directory
-clndir = '../clean/' #directory where the cleaned images reside
+clndir = '/home/rridden/data/tess/ffi/s01/clean/' #directory where the cleaned images reside
 
 ###END UPDATE###
 

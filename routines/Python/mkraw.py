@@ -63,11 +63,15 @@ for ii in range(0, 10):#nstars):
 	#write out the light curve
 	output1=open(lcdir+nm, 'w')
 	for jj in range(0, nfiles):
-		 output1.write('%f %f %f\n' % (numpy.round(jd[jj], decimals = 6), numpy.round(mg[jj,ii], decimals = 6), numpy.round(er[jj,ii], decimals = 6)))
+		 output1.write('%f %f %f\n' % (numpy.round(jd[jj], decimals = 6), 
+		 		numpy.round(mg[jj,ii], decimals = 6), numpy.round(er[jj,ii], 
+		 		decimals = 6)))
 	output1.close()
 	
 	#write out the star information for easy access
-	output2.write('%s %f %f %f %f\n' %(nm, numpy.round(xm[ii], decimals = 2), numpy.round(ym[ii], decimals = 2), numpy.round(mstmg[ii], decimals = 6), numpy.round(mstmge[ii], decimals = 6)))
+	output2.write('%s %f %f %f %f\n' %(nm, numpy.round(xm[ii], decimals = 2), 
+				numpy.round(ym[ii], decimals = 2), numpy.round(mstmg[ii], decimals = 6), 
+				numpy.round(mstmge[ii], decimals = 6)))
 
 output2.close()
 print 'All done at '+strftime("%a, %d %b %Y %H:%M:%S")+'. See ya later alligator.'
