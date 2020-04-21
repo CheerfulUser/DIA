@@ -40,8 +40,8 @@ for ii in range(0,len(files)):
 
 	if (ii == 0):  # get size on first iteration only
 		nx = pyfits.getval(clndir+files[0], 'NAXIS2')
-	        ny = pyfits.getval(clndir+files[0], 'NAXIS1')
-	        all_data = np.ndarray(shape=(blknum,nx,ny))
+			ny = pyfits.getval(clndir+files[0], 'NAXIS1')
+			all_data = np.ndarray(shape=(blknum,nx,ny))
 		expt = np.zeros(blknum)
 
 	#read in the image
@@ -60,7 +60,7 @@ for ii in range(0,len(files)):
 		#median combine the data
 		combined_data = np.median(all_data,axis=0)
 
-		# Write data to new file    
+		# Write data to new file	
 		new_image = pyfits.PrimaryHDU(combined_data)
 		new_image.header.set('NUMCOMB', cnt)
 		new_image.header.set('EXPTIME', np.median(expt))
@@ -77,7 +77,7 @@ for ii in range(0,len(files)):
 		cnt = 0
 
 		#clear the data file
-	        all_data = np.ndarray(shape=(blknum,nx,ny))
+			all_data = np.ndarray(shape=(blknum,nx,ny))
 		expt = np.zeros(blknum)
 
 del all_data, img_data # clear up some memory
